@@ -21,3 +21,11 @@ export const deleteProduct = (id) => {
     url: `/product?id=${id}`
   })
 }
+
+export const updateProduct = (data) => {
+  return apiCall({
+    method: 'PUT',
+    url: '/product',
+    data: data
+  })
+}

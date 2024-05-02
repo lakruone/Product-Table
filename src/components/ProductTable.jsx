@@ -7,6 +7,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import CustomModal from '../shared/Modal';
 import { ShowModalContext } from '../context/ShowModalContext';
 import { ModalType } from '../constants';
+import EditProduct from '../features/EditProduct';
 
 const TableWrapper = styled(TableContainer)`
   && {
@@ -49,6 +50,7 @@ const ProductTable = () => {
   const { showModal, setShowModal, modalType, setModalType} = useContext(ShowModalContext);
 
   const [deleteProduct,setDeleteProduct ] = useState(null);
+  const [editProduct,setEditProduct ] = useState(null);
   const { data: products, isLoading} = useGetProductList();
 
   const { mutate, isPending } = useDeleteProduct();
@@ -67,6 +69,12 @@ const ProductTable = () => {
     setDeleteProduct(null);
     setShowModal(false);
     setModalType(null);
+  }
+
+  const onEditClick = (product) => {
+    setEditProduct(product);
+    setShowModal(true);
+    setModalType(ModalType.EditProduct);
   }
 
   return (
@@ -91,8 +99,8 @@ const ProductTable = () => {
                   <TableCell>{product.name}</TableCell>
                   <TableCell>{product.price}</TableCell>
                   <TableCell>{product.description}</TableCell>
-                  <TableCell style={{textAlign: 'right'}} onClick={() => console.log('lakruwan', product.id)}>
-                    <ActionButton variant='text' > <EditIcon/></ActionButton>
+                  <TableCell style={{textAlign: 'right'}}>
+                    <ActionButton variant='text' onClick={() => onEditClick(product)}> <EditIcon/></ActionButton>
                     <ActionButton variant='text' onClick={() => onDeleteClick(product)}> <DeleteForeverIcon/></ActionButton>
                   </TableCell>
                 </CustomTableRow>
@@ -109,6 +117,7 @@ const ProductTable = () => {
             secondaryButtonOnClick={handleCloseDeleteModal}
             disabled={isPending}
           />
+          <EditProduct product={editProduct}/>
         </TableWrapper>
       }
     </>

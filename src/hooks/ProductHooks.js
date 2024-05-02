@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createProduct, deleteProduct, getProductList } from "../services/ProductServices";
+import { createProduct, deleteProduct, getProductList, updateProduct } from "../services/ProductServices";
 import { QueryKey, Toast } from "../constants";
 import { useContext } from "react";
 import { ShowModalContext } from "../context/ShowModalContext";
@@ -26,11 +26,7 @@ export function useCreateProduct() {
       queryClient.invalidateQueries({ queryKey: [QueryKey.products] });
       setShowModal(false);
       setModalType(null);
-      // toast('Product has been added successfully', { type: Toast.Success });
     },
-    // onError: () => {
-    //   toast('Something went wrong', { type: Toast.Error });
-    // },
   });
 }
 
@@ -43,10 +39,20 @@ export function useDeleteProduct() {
       queryClient.invalidateQueries({ queryKey: [QueryKey.products] });
       setShowModal(false);
       setModalType(null);
-      // toast('Client has been archived successfully', { type: Toast.Success });
     },
-    // onError: () => {
-    //   toast('Something went wrong', { type: Toast.Error });
-    // },
+  });
+}
+
+export function useUpdateProduct() {
+  const queryClient = useQueryClient();
+  const { setShowModal, setModalType }= useContext(ShowModalContext);
+
+  return useMutation({
+    mutationFn: (data) => updateProduct(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QueryKey.products] });
+      setShowModal(false);
+      setModalType(null);
+    }
   });
 }
