@@ -1,6 +1,7 @@
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, } from '@mui/material';
-import React, { useState } from 'react'
+import { CircularProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, } from '@mui/material';
+import React from 'react'
 import styled from 'styled-components';
+import { useGetProductList } from '../hooks/ProductHooks';
 
 const TableWrapper = styled(TableContainer)`
   && {
@@ -8,57 +9,51 @@ const TableWrapper = styled(TableContainer)`
   }
 `;
 
+const Spinner = styled(CircularProgress)`
+  && {
+    color: #fdc404;
+    margin-top: 100px;
+    margin-left: 100px;
+  }
+`;
+
+const HeaderCell = styled(TableCell)`
+  && {
+    font-weight: bold;
+  }
+`;
+
 const ProductTable = () => {
 
-  // TODO: pagination handle
-  // const [page, setPage] = useState(0);
+  const { data: products, isLoading} = useGetProductList();
 
-  // const handleChangePage = (event, newPage) => {
-  //   setPage(newPage);
-  // }
-
-  const rows = [
-    { id: 1, name: 'John Doe', age: 35, email: 'john.doe@example.com' },
-    { id: 2, name: 'Jane Doe', age: 25, email: 'jane.doe@example.com' },
-    { id: 3, name: 'Jane Doe', age: 25, email: 'jane.doe@example.com' },
-    { id: 4, name: 'Jane Doe', age: 25, email: 'jane.doe@example.com' },
-    { id: 5, name: 'Jane Doe', age: 25, email: 'jane.doe@example.com' },
-    { id: 6, name: 'Jane Doe', age: 25, email: 'jane.doe@example.com' },
-    { id: 7, name: 'Jane Doe', age: 25, email: 'jane.doe@example.com' },
-    { id: 8, name: 'Jane Doe', age: 25, email: 'jane.doe@example.com' },
-    // Add more rows as needed
-  ];
   return (
       <>
-        <TableWrapper component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Age</TableCell>
-              <TableCell>Email</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.id}>
-                <TableCell>{row.id}</TableCell>
-                <TableCell>{row.name}</TableCell>
-                <TableCell>{row.age}</TableCell>
-                <TableCell>{row.email}</TableCell>
+      {isLoading || !products? 
+        <Spinner size={80} /> : 
+          <TableWrapper component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <HeaderCell>ID</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Price</HeaderCell>
+                <HeaderCell>Description</HeaderCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableWrapper>
-      {/* <TablePagination
-        rowsPerPageOptions={[5, 25, 100]}
-        component="div"
-        count={rows.length}
-        page={page}
-        onPageChange={handleChangePage}
-      /> */}
+            </TableHead>
+            <TableBody>
+              {products.map((product) => (
+                <TableRow key={product.id}>
+                  <TableCell>{product.id}</TableCell>
+                  <TableCell>{product.name}</TableCell>
+                  <TableCell>{product.price}</TableCell>
+                  <TableCell>{product.description}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableWrapper>
+      }
     </>
   )
 }
