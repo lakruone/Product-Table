@@ -26,6 +26,7 @@ const CustomModal = ({
   secondaryButtonLabel,
   secondaryButtonOnClick,
   handleClose,
+  disabled
 }) => {
  
 
@@ -47,7 +48,7 @@ const CustomModal = ({
           {!!children && <div >{children}</div>}
           <Box display={'flex'} gap={'5px'} width={'100%'}>
             {!!secondaryButtonLabel && <SecondaryButton sx={{ flex: '1' }} onClick={secondaryButtonOnClick}>{secondaryButtonLabel}</SecondaryButton>}
-            {!!primaryButtonLabel && <PrimaryButton sx={{ flex: '1' }} onClick={primaryButtonOnClick}>{primaryButtonLabel}</PrimaryButton>}
+            {!!primaryButtonLabel && <PrimaryButton sx={{ flex: '1' }} onClick={primaryButtonOnClick} disabled={disabled}>{primaryButtonLabel}</PrimaryButton>}
           </Box>
         </Box>
       </Modal>

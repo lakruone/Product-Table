@@ -9,3 +9,9 @@ export const Toast = {
   Warn: 'warn',
   Error: 'error',
 };
+
+export const ModalType = {
+  AddProduct: 'addProduct',
+  EditProduct: 'editProduct',
+  DeleteProduct: 'deleteProduct'
+}

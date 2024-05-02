@@ -3,26 +3,31 @@ import CustomModal from '../shared/Modal';
 import ProductForm from './ProductForm';
 import { shortUUID } from '../utils/shortUUID';
 import { useCreateProduct } from '../hooks/ProductHooks';
-import { ShowProductModalContext } from '../context/ShowProductModalContext';
+import { ShowModalContext } from '../context/ShowModalContext';
+import { ModalType } from '../constants';
 
 const AddProduct = () => {
-  const { showModal, setShowModal} = useContext(ShowProductModalContext);
+  const { showModal, setShowModal, modalType, setModalType} = useContext(ShowModalContext);
 
   const uuid = shortUUID();
 
   const { mutate, isPending } = useCreateProduct();
 
+  const handleClose = () => {
+    setShowModal(false);
+    setModalType(null);
+  }
+
   const handleSave = async(values) => {
-    console.log('save data', values);
     mutate({...values, price: Number(values.price)});
   }
   return (
     <CustomModal
-      open={showModal}
+      open={showModal && modalType === ModalType.AddProduct}
       title='New Product'
-      handleClose={() => setShowModal(false)}
+      handleClose={handleClose}
     >
-      <ProductForm handleSubmit={handleSave} handleClose={() => setShowModal(false)} initialValues={{id: uuid}} isPending={isPending}/>
+      <ProductForm handleSubmit={handleSave} handleClose={handleClose} initialValues={{id: uuid}} isPending={isPending}/>
     </CustomModal>
   )
 }

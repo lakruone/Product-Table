@@ -4,7 +4,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import './App.css'
 import Header from './components/Header';
 import ProductTable from './components/ProductTable';
-import { ShowProductModalContextProvider } from './context/ShowProductModalContext';
+import { ShowModalContextProvider } from './context/ShowModalContext';
 import { ToastContainer } from 'react-toastify';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import InfoIcon from '@mui/icons-material/Info';
@@ -37,7 +37,7 @@ function App() {
   return (
     <>   
       <QueryClientProvider client={queryClient}>
-        <ShowProductModalContextProvider>
+        <ShowModalContextProvider>
           <ReactQueryDevtools initialIsOpen={false} position="bottom" />
           <Header/>
           <ProductTable/>
@@ -55,7 +55,7 @@ function App() {
               return <HighlightOffIcon color="#d22e22" />;
             }}
           />
-        </ShowProductModalContextProvider>
+        </ShowModalContextProvider>
       </QueryClientProvider>   
     </>
   )

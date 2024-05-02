@@ -14,3 +14,10 @@ export const createProduct = (data) => {
     data: data
   })
 }
+
+export const deleteProduct = (id) => {
+  return apiCall({
+    method: 'DELETE',
+    url: `/product?id=${id}`
+  })
+}

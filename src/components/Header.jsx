@@ -1,26 +1,11 @@
-import { Button, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import AddProduct from '../features/AddProduct';
 import PrimaryButton from '../shared/PrimaryButton';
-import { ShowProductModalContext } from '../context/ShowProductModalContext';
-
-const AddButton = styled(Button)`
-  && {
-    float: right;
-    background: #fdc404;
-    border-radius: 20px;
-    color: black;
-    width: 160px;
-    height: 45px;
-    margin: 20px 0;
-    text-transform: none;
-    &:hover {
-      background: #ffea00;
-    }
-  }
-`;
+import { ShowModalContext } from '../context/ShowModalContext';
+import { ModalType } from '../constants';
 
 const Heading = styled(Typography)`
   && {
@@ -32,12 +17,17 @@ const Heading = styled(Typography)`
 `;
 
 const Header = () => {
-  const { setShowModal} = useContext(ShowProductModalContext);
+  const { setShowModal, setModalType} = useContext(ShowModalContext);
+
+  const handleNewProductClick = () => {
+    setShowModal(true);
+    setModalType(ModalType.AddProduct);
+  }
 
   return (
     <>
         <Heading variant="h4" >Products</Heading>
-        <PrimaryButton onClick={() => setShowModal(true)}><AddRoundedIcon fontSize='small' sx={{paddingRight: '5px'}}/>New Product</PrimaryButton>
+        <PrimaryButton onClick={handleNewProductClick}><AddRoundedIcon fontSize='small' sx={{paddingRight: '5px'}}/>New Product</PrimaryButton>
         <AddProduct />
     </>
   )
