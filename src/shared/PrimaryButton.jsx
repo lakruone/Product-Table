@@ -18,9 +18,9 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const PrimaryButton = ({children, onClick, sx, type}) => {
+const PrimaryButton = ({children, onClick, sx, type, disabled}) => {
   return (
-    <StyledButton variant="contained" sx={sx} onClick={onClick} type={type}>{children}</StyledButton>
+    <StyledButton variant="contained" sx={sx} onClick={onClick} type={type} disabled={disabled}>{children}</StyledButton>
   )
 }
 

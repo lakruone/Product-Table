@@ -1,9 +1,10 @@
 import { Button, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import AddProduct from '../features/AddProduct';
 import PrimaryButton from '../shared/PrimaryButton';
+import { ShowProductModalContext } from '../context/ShowProductModalContext';
 
 const AddButton = styled(Button)`
   && {
@@ -31,20 +32,13 @@ const Heading = styled(Typography)`
 `;
 
 const Header = () => {
-  const [showModal, setShowModal ] = useState(false);
-  const handleCloseModal = () => {
-    setShowModal(false);
-  }
-
-  const handleShowModal = () => {
-    setShowModal(true);
-  }
+  const { setShowModal} = useContext(ShowProductModalContext);
 
   return (
     <>
         <Heading variant="h4" >Products</Heading>
-        <PrimaryButton onClick={handleShowModal}><AddRoundedIcon fontSize='small' sx={{paddingRight: '5px'}}/>New Product</PrimaryButton>
-        <AddProduct open={showModal} handleClose={handleCloseModal}/>
+        <PrimaryButton onClick={() => setShowModal(true)}><AddRoundedIcon fontSize='small' sx={{paddingRight: '5px'}}/>New Product</PrimaryButton>
+        <AddProduct />
     </>
   )
 }
