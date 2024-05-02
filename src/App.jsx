@@ -1,12 +1,13 @@
 import './App.css'
+import Header from './components/Header';
+import ProductTable from './components/ProductTable';
 
 function App() {
 
   return (
-    <>
-     <div>
-      <h2>Products</h2>
-     </div>
+    <>      
+      <Header/>
+      <ProductTable/>
     </>
   )
 }
