@@ -5,7 +5,8 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import AddProduct from '../features/AddProduct';
 import PrimaryButton from '../shared/PrimaryButton';
 import { ShowModalContext } from '../context/ShowModalContext';
-import { ModalType } from '../constants';
+import { ModalType, Toast } from '../constants';
+import { toast } from 'react-toastify';
 
 const Heading = styled(Typography)`
   && {

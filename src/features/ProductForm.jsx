@@ -96,7 +96,7 @@ const ProductForm = ({handleSubmit, handleClose, initialValues, isPending}) => {
         onChange={handleDescriptionChange}
       />
       <Box display={'flex'} gap={'5px'} width={'100%'}>
-        <SecondaryButton sx={{ flex: '1' }} onClick={handleClose}>Close</SecondaryButton>
+        <SecondaryButton sx={{ flex: '1' }} onClick={handleClose}>Cancel</SecondaryButton>
         <PrimaryButton  type="submit" sx={{ flex: '1' }} disabled={isPending}>Save</PrimaryButton>
       </Box>
     </Box>

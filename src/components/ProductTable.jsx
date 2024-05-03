@@ -97,7 +97,7 @@ const ProductTable = () => {
                 <CustomTableRow key={product.id}>
                   <TableCell>{product.id}</TableCell>
                   <TableCell>{product.name}</TableCell>
-                  <TableCell>{product.price}</TableCell>
+                  <TableCell>${product.price}</TableCell>
                   <TableCell>{product.description}</TableCell>
                   <TableCell style={{textAlign: 'right'}}>
                     <ActionButton variant='text' onClick={() => onEditClick(product)}> <EditIcon/></ActionButton>
@@ -110,7 +110,7 @@ const ProductTable = () => {
           <CustomModal
             open={showModal && modalType === ModalType.DeleteProduct}
             title= {`Delete ${deleteProduct?.name}`}
-            description='Are you sure you want to delete ?'
+            description='Are you sure you want to delete?'
             primaryButtonLabel='Yes'
             primaryButtonOnClick={handleDelete}
             secondaryButtonLabel='Cancel'

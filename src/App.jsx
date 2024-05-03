@@ -9,30 +9,11 @@ import { ToastContainer } from 'react-toastify';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import InfoIcon from '@mui/icons-material/Info';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import styled from 'styled-components';
 import { Toast } from './constants';
-
-const StyledToastContainer = styled(ToastContainer)`
-  &&&.Toastify__toast-container {
-  }
-  .Toastify__toast {
-    padding: 16px;
-    min-height: unset;
-  }
-  .Toastify__toast-body {
-    padding: 0;
-    margin: 0;
-    font-size: 14px;
-    font-weight: 400;
-    color: #09090b;
-  }
-  .Toastify__progress-bar {
-  }
-`;
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const queryClient = new QueryClient();
-
 
   return (
     <>   
@@ -41,18 +22,18 @@ function App() {
           <ReactQueryDevtools initialIsOpen={false} position="bottom" />
           <Header/>
           <ProductTable/>
-          <StyledToastContainer
+          <ToastContainer
             position="top-right"
-            autoClose={3000}
+            autoClose={4000}
             hideProgressBar
             closeOnClick
             newestOnTop={false}
             rtl={false}
             pauseOnHover
             icon={({ type }) => {
-              if (type === Toast.Success) return <TaskAltIcon color="#16905d" />;
-              if (type === Toast.Warn) return <InfoIcon color="#fcca2c" />;
-              return <HighlightOffIcon color="#d22e22" />;
+              if (type === Toast.Success) return <TaskAltIcon color="success" />;
+              if (type === Toast.Warn) return <InfoIcon  sx={{ color: '#fcca2c' }} />;
+              return <HighlightOffIcon sx={{ color: '#d22e22' }} />;
             }}
           />
         </ShowModalContextProvider>

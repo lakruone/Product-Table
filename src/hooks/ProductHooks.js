@@ -11,6 +11,9 @@ export function useGetProductList() {
       queryFn: async() => {
         const response = await getProductList();
         return response.data;
+      },
+      onError: () => {
+        toast('Something went wrong in fetching products', { type: Toast.Error });
       }
     });
   }
@@ -26,7 +29,11 @@ export function useCreateProduct() {
       queryClient.invalidateQueries({ queryKey: [QueryKey.products] });
       setShowModal(false);
       setModalType(null);
+      toast('Product has been added successfully', { type: Toast.Success });
     },
+    onError: () => {
+      toast('Something went wrong in adding product', { type: Toast.Error });
+    }
   });
 }
 
@@ -39,7 +46,11 @@ export function useDeleteProduct() {
       queryClient.invalidateQueries({ queryKey: [QueryKey.products] });
       setShowModal(false);
       setModalType(null);
+      toast('Product has been deleted successfully', { type: Toast.Success });
     },
+    onError: () => {
+      toast('Something went wrong in deleting product', { type: Toast.Error });
+    }
   });
 }
 
@@ -53,6 +64,10 @@ export function useUpdateProduct() {
       queryClient.invalidateQueries({ queryKey: [QueryKey.products] });
       setShowModal(false);
       setModalType(null);
+      toast('Product has been updated successfully', { type: Toast.Success });
+    },
+    onError: () => {
+      toast('Something went wrong in updating product', { type: Toast.Error });
     }
   });
 }
